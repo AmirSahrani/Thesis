@@ -6,7 +6,7 @@ now = datetime.now()
 f.write(f"Date: {now}\n")
 inputheads = input("Select the key you want to press for heads: ")
 inputtails = input("Select the key you want to press for tails: ")
-f.write(f"keys for heads is :{inputheads}, key for tails: {inputtails}")
+f.write(f"keys for heads is :{inputheads}, key for tails: {inputtails}\n")
 
 counter = 0
 string = ""
