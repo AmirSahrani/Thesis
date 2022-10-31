@@ -1,4 +1,3 @@
-from os import write
 from random import choice
 from datetime import datetime
 f = open("HeadsandTails.txt", "a")
