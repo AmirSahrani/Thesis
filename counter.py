@@ -1,5 +1,7 @@
 from random import choice
 from datetime import datetime
+from playsound import playsound
+
 f = open("HeadsandTails.txt", "a")
 now = datetime.now()
 f.write(f"Date: {now}\n")
@@ -13,6 +15,7 @@ while True:
     inputs = []
     start = choice(["Heads","Tails"])
     print(f"!!!!!!!!!!!!!!!!!!!! Please start with {start} facing up !!!!!!!!!!!!!!!!")
+    playsound('C:\\Users\\amisa\\Documents\\Python\\Thesis\\bell.wav')
     while True:
         while True:
             x = input(f"Last outcome for heads press: \"{inputheads}\" for tails press \"{inputtails}\": ")
@@ -21,7 +24,7 @@ while True:
                 counter += 1
                 print(string.join(inputs))
                 break
-        if counter % 100 == 0:
+        if counter % 5 == 0:
             break
     f.write(f"{string.join(inputs)}\n")
     
