@@ -24,7 +24,7 @@ while True:
                 counter += 1
                 print(string.join(inputs))
                 break
-        if counter % 5 == 0:
+        if counter % 100 == 0:
             break
     f.write(f"{string.join(inputs)}\n")
     
