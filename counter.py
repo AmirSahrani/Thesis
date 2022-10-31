@@ -2,7 +2,7 @@ from random import choice
 
 inputheads = input("Select the key you want to press for heads: ")
 inputtails = input("Select the key you want to press for tails: ")
-counter = 1
+counter = 0
 inputs = []
 string = ""
 while True:
@@ -16,5 +16,5 @@ while True:
                 counter += 1
                 print(string.join(inputs))
                 break
-        if counter % 10 == 0:
+        if counter % 100 == 0:
             break
