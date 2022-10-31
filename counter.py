@@ -1,7 +1,9 @@
 from os import write
 from random import choice
+from datetime import datetime
 f = open("HeadsandTails.txt", "a")
-
+now = datetime.now()
+f.write(f"Date: {now}\n")
 inputheads = input("Select the key you want to press for heads: ")
 inputtails = input("Select the key you want to press for tails: ")
 
@@ -21,5 +23,5 @@ while True:
                 break
         if counter % 10 == 0:
             break
-    f.write(f"{inputs}\n")
+    f.write(f"{string.join(inputs)}\n")
     
