@@ -9,6 +9,10 @@ counter = 0
 string = ""
 
 f = open("HeadsandTails.txt", "a")
+x = open("HeadsandTails.txt")
+Ncoins = len(list(x))
+x.close()
+print(f"Current number of entries is: {Ncoins*100}")
 # f.write(f"Date: {now}\n")
 coin = input("Which coin are you using?")
 inputheads  = input("Select the key you want to press for heads: ")
@@ -45,12 +49,16 @@ while True:
                 print(string.join(inputs))
                 continue
             break
-        if counter % 5 == 0:
+        if counter % 100 == 0:
             break
-    if input != []:
+    if inputs != []:
         now = datetime.now()
         now = now.strftime("%Y-%m-%d %H:%M:%S")
         f.write(f"{now},{coin},{start},{string.join(inputs)}\n")
+        Ncoins += 1
+        print(f"Current number of entries is: {Ncoins*100}")
+        
+        
 
 ## You can always press ctrl + c in the terminal to terminate the process, doing so in the middle of a block will discard that specific block, 
 # if you want to save it you can manually copy it from the terminal and paste it in the .txt file
