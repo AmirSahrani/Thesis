@@ -1,4 +1,4 @@
-# pip install playsound==1.2.2      You need this specific version of the package for it to work
+# pip install playsound==1.2.2      You need this specific version of the package for it to work, I don't think this works with anaconda install
 from random import choice
 from datetime import datetime
 from playsound import playsound
@@ -17,12 +17,11 @@ print(f"Current number of entries is: {Ncoins*100}")
 coin = input("Which coin are you using?")
 inputheads  = input("Select the key you want to press for heads: ")
 inputtails  = input("Select the key you want to press for tails: ")
-failedheads = input("Select the key you want to press for a failed heads: ")
-failedtails = input("Select the key you want to press for a failed tails: ")
+failedheads = input("Select the key you want to press for a failed attempt: ")
 undo        = input("Select the key you want to use for undoing you previous input: ")
 change_coin = input("Select the key you want to use to change the coin: ")
 
-dict = {inputheads: "h", inputtails: "t", failedheads : "x", failedtails: "y"}
+dict = {inputheads: "h", inputtails: "t", failedheads : "x"}
 
 while True:
     inputs = []
@@ -39,7 +38,7 @@ while True:
                 inputs.append(dict[x])
                 counter += 1
                 print(string.join(inputs))
-            elif x in [failedheads, failedtails]:
+            elif x in [failedheads]:
                 inputs.append(dict[x])
                 print(string.join(inputs))
                 continue
@@ -57,8 +56,7 @@ while True:
         f.write(f"{now},{coin},{start},{string.join(inputs)}\n")
         Ncoins += 1
         print(f"Current number of entries is: {Ncoins*100}")
-        
-        
+            
 
 ## You can always press ctrl + c in the terminal to terminate the process, doing so in the middle of a block will discard that specific block, 
 # if you want to save it you can manually copy it from the terminal and paste it in the .txt file
