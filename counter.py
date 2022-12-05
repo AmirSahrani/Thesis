@@ -15,6 +15,7 @@ x.close()
 print(f"Current number of entries is: {Ncoins*100}")
 # f.write(f"Date: {now}\n")
 coin = input("Which coin are you using?")
+coin = input("Which coin are you using?")
 inputheads  = input("Select the key you want to press for heads: ")
 inputtails  = input("Select the key you want to press for tails: ")
 failedheads = input("Select the key you want to press for a failed attempt: ")
@@ -42,7 +43,7 @@ while True:
                 inputs.append(dict[x])
                 print(string.join(inputs))
                 continue
-            elif x == undo:
+            elif x == undo and inputs != []:
                 inputs.pop()
                 counter = counter -1
                 print(string.join(inputs))
