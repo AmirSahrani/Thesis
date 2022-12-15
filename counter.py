@@ -50,7 +50,7 @@ while True:
                 print(string.join(inputs))
                 continue
             break
-        if counter % 10 == 0:
+        if counter % 100 == 0:
             break
     if inputs != []:
         now = datetime.now()
