@@ -7,20 +7,21 @@ from playsound import playsound
 
 counter = 0
 string = ""
-
-f = open("HeadsandTails.txt", "a")
-x = open("HeadsandTails.txt")
-Ncoins = len(list(x))
-x.close()
-print(f"Current number of entries is: {Ncoins*100}")
-# f.write(f"Date: {now}\n")
+try: 
+    with open("Testing.txt", "r") as f:
+        Ncoins = len(list(f))
+        print(f"Current number of entries is: {Ncoins*100}")
+except:
+    with open("Testing.txt", "w") as f:
+        f.write("Date, Coin, Start, Sequence\n")
+        Ncoins = 0
+        print(f"Current number of entries is: {Ncoins*100}")
 coin = input("Which coin are you using?")
 inputheads  = input("Select the key you want to press for heads: ")
 inputtails  = input("Select the key you want to press for tails: ")
 failedheads = input("Select the key you want to press for a failed attempt: ")
 undo        = input("Select the key you want to use for undoing you previous input: ")
 change_coin = input("Select the key you want to use to change the coin: ")
-
 
 dict = {inputheads: "h", inputtails: "t", failedheads : "x"}
 
@@ -49,12 +50,14 @@ while True:
                 print(string.join(inputs))
                 continue
             break
-        if counter % 100 == 0:
+        if counter % 10 == 0:
             break
     if inputs != []:
         now = datetime.now()
         now = now.strftime("%Y-%m-%d %H:%M:%S")
+        f = open("Testing.txt", "a")
         f.write(f"{now},{coin},{start},{string.join(inputs)}\n")
+        f.close()
         Ncoins += 1
         print(f"Current number of entries is: {Ncoins*100}")
             
