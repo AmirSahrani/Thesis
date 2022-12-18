@@ -8,11 +8,11 @@ from playsound import playsound
 counter = 0
 string = ""
 try: 
-    with open("Testing.txt", "r") as f:
+    with open("HeadsandTails.txt", "r") as f:
         Ncoins = len(list(f))
         print(f"Current number of entries is: {Ncoins*100}")
 except:
-    with open("Testing.txt", "w") as f:
+    with open("HeadsandTails.txt", "w") as f:
         f.write("Date, Coin, Start, Sequence\n")
         Ncoins = 0
         print(f"Current number of entries is: {Ncoins*100}")
@@ -50,12 +50,12 @@ while True:
                 print(string.join(inputs))
                 continue
             break
-        if counter % 10 == 0:
+        if counter % 100 == 0:
             break
     if inputs != []:
         now = datetime.now()
         now = now.strftime("%Y-%m-%d %H:%M:%S")
-        f = open("Testing.txt", "a")
+        f = open("HeadsandTails.txt", "a")
         f.write(f"{now},{coin},{start},{string.join(inputs)}\n")
         f.close()
         Ncoins += 1
