@@ -2,23 +2,23 @@ data {
   int<lower=0> N; // number of observations
   int<lower=0> K; // number of tossers
   int<lower=0> C; // number of coins
-  int Alpha;
-  int Beta;
-  real mu_k;
-  real sigma_k;
-  real mu_c;
-  real sigma_c;
-  real theta0;
   int y[N];       // 1 = success, 0 = failure
   int map_k[N];   // mapping from tossers to outcomes
   int map_c[N];   // Mapping coins to outcomes
+  int Alpha;
+  int Beta;
+  real mu_k;
+  real mu_c;
+  real theta0;
 }
 parameters {
   real<lower=0.5, upper=1> theta; // probability of success
   real<lower=0> sigma_gamma_k;    // standard deviation of the distribution of tossers (on logistic scale), must be positive
   real<lower=0> sigma_gamma_c;
   real gamma_k[K];                // difference of each individual tosser from the probability of success (on logistic scale)
-  real gamma_c[]
+  real gamma_c[C];
+  real sigma_k;
+  real sigma_c;
 }
 model {
   // prior distribution on the overal probability of success
@@ -46,7 +46,6 @@ model {
     real logit_mu_k = logit(theta) + gamma_k[map_k[n]] + gamma_c[map_c[n]];
 
     // a product (on log scale) of the Bernoulli trials, including the back transformation
-    target += Bernoulli(y[n] | inv_logit(logit_mu_k));
+    target += bernoulli_lpmf(y[n] | inv_logit(logit_mu_k));
   }
-
 }

@@ -8,13 +8,13 @@ data {
   real mu_k;
   real theta0;
   real lower_bound;
-  real sigma_mean;
-  real sigma_std;
 }
 parameters {
   real<lower=lower_bound, upper=1> theta; // probability of success
   real<lower=0> sigma_gamma_k;    // standard deviation of the distribution of tossers (on logistic scale), must be positive
   real<lower=0> sigma_k;
+  real sigma_mean;
+  real sigma_std;
   real gamma_k[K];                // difference of each individual tosser from the probability of success (on logistic scale)
 }
 model {
