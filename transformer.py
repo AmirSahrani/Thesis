@@ -1,7 +1,7 @@
 import pandas as pd
 from numpy import mean
 
-f = pd.read_csv('C:\\Users\\amisa\\Downloads\\merged-marathon-2.csv', header = 0)
+f = pd.read_csv('merged.csv', header = 0)
 df = pd.DataFrame(f)
 
 df["start"] = df["start"].str[0]
