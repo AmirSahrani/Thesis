@@ -94,7 +94,7 @@ for (i in 1:length(samples)){
 }
 
 
-data_coin = read.csv("merged.csv")
+data_coin = read.csv("data/merged.csv")
 
 # log marginal likelihood under the null
 log_marglik_0 <- sum(dbinom(x = data_coin$succes, size = 1, prob = 0.5, log = TRUE))
@@ -143,19 +143,19 @@ data_hierarchical_coin <- list(
 )
 # Stan models
 # Simple model
-model_simple <- stan_model(file = "simple.stan")
+model_simple <- stan_model(file = "models/simple.stan")
 fit_simple <- sampling(model_simple, data = data, iter = 10000)
 marglikSimple <- bridge_sampler(fit_simple)
 # Hierarchical model with just coin
-model_hierchical <- stan_model(file = "hierarchical_person.stan")
+model_hierchical <- stan_model(file = "models/hierarchical_person.stan")
 fitjustcoin <- sampling(model_hierchical, data = data_hierarchical_just_coin, iter = 10000)
 marglikCoin <- bridge_sampler(fitjustcoin)
 # Hierarchical model with person
-model_hierchical <- stan_model(file = "hierarchical_person.stan")
+model_hierchical <- stan_model(file = "models/hierarchical_person.stan")
 fitPerson <- sampling(model_hierchical, data = data_hierarchical_person)
 marglikPerson <- bridge_sampler(fitPerson)
 # Hierarchical model with person and coin
-model_Coin <- stan_model(file = "hierarchical_coin.stan")
+model_Coin <- stan_model(file = "models/hierarchical_coin.stan")
 fitCoin <- sampling(model_Coin, data = data_hierarchical_coin, iter = 15000, warmup = 5000)
 marglikCombined  <- bridge_sampler(fitCoin)
 
@@ -167,7 +167,7 @@ exp(marglikCombined$logml - marglikPerson$logml)
 
 
 
-auditdata <- read.csv("auditdata_fixed.csv")
+auditdata <- read.csv("data/auditdata_fixed.csv")
 # log marginal likelihood under the null
 marglik_audit <- sum(dbinom(x = auditdata$error, size = 1, prob = 0.0001, log = TRUE))
 
@@ -203,17 +203,17 @@ data_person <- list(
 )
 # Stan models
 # Simple model
-model_simple <- stan_model(file = "simple.stan")
+model_simple <- stan_model(file = "models/simple.stan")
 fit_simple <- sampling(model_simple, data = data_error, iter = 10000) 
 marglik_audit_simple <- bridge_sampler(fit_simple)
 
 # Hierarchical model with just success
-model_error <- stan_model(file = "hierarchical_person.stan")
+model_error <- stan_model(file = "models/hierarchical_person.stan")
 fit_error <- sampling(model_error, data = data_error, iter = 20000)
 marglik_audit_error <- bridge_sampler(fit_error)
 
 # Hierarchical model with person
-model_person <- stan_model(file = "hierarchical_person.stan")
+model_person <- stan_model(file = "models/hierarchical_person.stan")
 fit_person <- sampling(model_person, data = data_person, iter = 10000)
 marglik_audit_person <- bridge_sampler(fit_person)
 
@@ -221,34 +221,3 @@ marglik_audit_person <- bridge_sampler(fit_person)
 exp(marglikaudit - marglik_audit_simple$logml)
 exp(marglik_audit_simple$logml - marglik_audit_error$logml)
 exp(marglik_audit_simple$logml - marglik_audit_person$logml)
-
-
-
-# REMOVE THIS
-marglik_2 = -93025.54     
-marglikPerson= -93007.64        
-marglikCombined= -93007.65       
-marglikCoin =-93013.55
-log_marglik_0  = -93043.92    
-exp(marglik_2 -log_marglik_0)
-exp(marglik_2 - marglikPerson)
-exp(marglikPerson - marglik_2 )
-exp(marglikPerson- marglikCombined)
-exp(marglikPerson - marglikCombined )
-exp(marglikPerson - marglikCoin)
-exp(marglikPerson - log_marglik_0)
-marglik_2 = -93025.54     
-marglikPerson= -93007.64        
-marglikCombined= -93007.65       
-marglikCoin =-93013.55
-log_marglik_0  = -93043.92    
-exp(marglikPerson - marglik_2$logml)
-exp(marglikPerson - marglikCoin)
-exp(marglikPerson - marglikCombined )
-exp(marglikPerson - log_marglik_0)
-
-exp(log_marglik_0 - marglik_2$logml)
-exp(log_marglik_0 - marglikPerson)
-exp(log_marglik_0 - marglikCoin)
-exp(log_marglik_0 - marglikCombined )
-
