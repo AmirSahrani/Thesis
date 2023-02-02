@@ -5,16 +5,12 @@ data {
   int map_k[N];   // mapping from tossers to outcomes
   int Alpha;
   int Beta;
-  real mu_k;
   real theta0;
   real lower_bound;
 }
 parameters {
   real<lower=lower_bound, upper=1> theta; // probability of success
   real<lower=0> sigma_gamma_k;    // standard deviation of the distribution of tossers (on logistic scale), must be positive
-  real<lower=0> sigma_k;
-  real sigma_mean;
-  real sigma_std;
   real gamma_k[K];                // difference of each individual tosser from the probability of success (on logistic scale)
 }
 model {
@@ -23,9 +19,7 @@ model {
 
   // prior distribution on the standard deviation of the distribution of tossers -- the smaller the value, the more similar the tossers are
   // we would probably not expect to see large differences from the overall distribution
-  target += normal_lpdf(sigma_k | sigma_mean, sigma_std) - normal_lccdf(sigma_k | sigma_mean,sigma_std);
-
-  target += normal_lpdf(sigma_gamma_k | mu_k, sigma_k) - normal_lccdf(0 | mu_k, sigma_k);
+  target += normal_lpdf(sigma_gamma_k | 0, 0.01) - normal_lccdf(0 | 0, 0.01);
 
   // hierarchical prior distribution on difference of each individual tosser from the probability of success (on logistic scale)
   // we assume that the tossers are centered around the overall probability of success (therefore the distribution is centered at 0)
